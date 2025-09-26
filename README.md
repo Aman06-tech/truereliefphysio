@@ -220,13 +220,3 @@ truereliefphysio/
 
 This project is licensed under the MIT License.
 
-## 🙏 Acknowledgments
-
-- PAL Physiotherapy for service insights and comprehensive treatment catalog
-- Next.js and Django communities for excellent documentation
-- Tailwind CSS for the beautiful design system
-- All patients and users who will benefit from this system
-
----
-
-**Professional physiotherapy care delivered with modern technology.**
