@@ -47,17 +47,17 @@ export function Footer() {
                 <HiOutlineHeart className="w-7 h-7 text-white" />
               </motion.div>
               <div>
-                <h3 className="text-xl font-bold">PainChain</h3>
-                <p className="text-primary-400 text-sm font-medium">Medical Center</p>
+                <h3 className="text-xl font-bold">TrueRelief</h3>
+                <p className="text-primary-400 text-sm font-medium">Physiotherapy</p>
               </div>
             </div>
             <p className="text-slate-400 mb-6 leading-relaxed">
-              Leading healthcare provider specializing in pain management and rehabilitation.
+              Professional physiotherapy services specializing in home care and rehabilitation.
               Committed to helping you achieve optimal health and wellness.
             </p>
             <div className="flex items-center space-x-2 text-success-400">
               <div className="w-3 h-3 bg-success-400 rounded-full animate-pulse" />
-              <span className="text-sm font-medium">Available 24/7 for Emergencies</span>
+              <span className="text-sm font-medium">Available 8AM - 8PM</span>
             </div>
           </div>
 
@@ -102,16 +102,16 @@ export function Footer() {
               <div className="flex items-start space-x-3">
                 <HiOutlineMapPin className="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0" />
                 <div className="text-slate-400 text-sm">
-                  <p>123 Medical Center Drive</p>
-                  <p>Healthcare City, ST 12345</p>
+                  <p>Gurgaon & Delhi NCR</p>
+                  <p>Home Care Services</p>
                 </div>
               </div>
 
               <div className="flex items-center space-x-3">
                 <HiOutlinePhone className="w-5 h-5 text-primary-400 flex-shrink-0" />
                 <div className="text-slate-400 text-sm">
-                  <p className="font-medium">+1 (555) 123-4567</p>
-                  <p className="text-xs text-slate-500">Main Line</p>
+                  <p className="font-medium">9625891710 | 8449555400</p>
+                  <p className="text-xs text-slate-500">Home Care & Online</p>
                 </div>
               </div>
 
@@ -127,9 +127,8 @@ export function Footer() {
                 <HiOutlineClock className="w-5 h-5 text-primary-400 mt-0.5 flex-shrink-0" />
                 <div className="text-slate-400 text-sm">
                   <p className="font-medium">Business Hours:</p>
-                  <p>Mon - Fri: 8:00 AM - 8:00 PM</p>
-                  <p>Sat - Sun: 9:00 AM - 5:00 PM</p>
-                  <p className="text-success-400 text-xs mt-1">Emergency: 24/7</p>
+                  <p>Mon - Sun: 8:00 AM - 8:00 PM</p>
+                  <p className="text-success-400 text-xs mt-1">Available Daily</p>
                 </div>
               </div>
             </div>
@@ -142,7 +141,7 @@ export function Footer() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-slate-400 text-sm text-center md:text-left">
-              <p>&copy; {currentYear} PainChain Medical Center. All rights reserved.</p>
+              <p>&copy; {currentYear} TrueRelief Physiotherapy. All rights reserved.</p>
               <p className="mt-1">Licensed Healthcare Provider | HIPAA Compliant</p>
             </div>
 
