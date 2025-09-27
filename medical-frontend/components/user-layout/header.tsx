@@ -10,12 +10,14 @@ import {
   HiOutlineSun,
   HiOutlineMoon,
   HiOutlinePhone,
-  HiOutlineMapPin
+  HiOutlineMapPin,
+  HiOutlineChevronDown
 } from 'react-icons/hi2'
 import Link from 'next/link'
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isServicesOpen, setIsServicesOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
@@ -23,9 +25,34 @@ export function Header() {
     setMounted(true)
   }, [])
 
+  const services = [
+    'Physiotherapy',
+    'Manual Therapy',
+    'Electro Therapy',
+    'Class 4 Laser Therapy / HILT',
+    'Exercise & Fitness',
+    'Custom Orthotics',
+    'Cupping Therapy',
+    'Orthopaedic Physiotherapy',
+    'Neuro Physiotherapy',
+    'Sports Physiotherapy',
+    'Paediatrics Physiotherapy',
+    'Dry Needling',
+    'Physiotherapy at Home',
+    'Female Physio',
+    'Chest Physiotherapy',
+    'Osteopathy Services',
+    'Tele Physiotherapy',
+    'Chiropractic Therapy',
+    'Obesity Physiotherapy',
+    'IASTM Therapy',
+    'Vertigo Testing',
+    'Shockwave Therapy'
+  ]
+
   const menuItems = [
     { name: 'Home', href: '/', active: true },
-    { name: 'Services', href: '/services' },
+    { name: 'Services', href: '/services', hasDropdown: true },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' },
     { name: 'Book Appointment', href: '/appointments', isButton: true }
@@ -78,21 +105,64 @@ export function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">
-              {menuItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`${
-                    item.isButton
-                      ? 'medical-button px-6 py-3'
-                      : item.active
-                      ? 'text-primary-600 dark:text-primary-400 font-semibold'
-                      : 'text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium'
-                  } transition-colors duration-200`}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {menuItems.map((item) => {
+                if (item.hasDropdown) {
+                  return (
+                    <div key={item.name} className="relative">
+                      <button
+                        onClick={() => setIsServicesOpen(!isServicesOpen)}
+                        onMouseEnter={() => setIsServicesOpen(true)}
+                        className="flex items-center space-x-1 text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors duration-200"
+                      >
+                        <span>{item.name}</span>
+                        <HiOutlineChevronDown className={`w-4 h-4 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+
+                      <AnimatePresence>
+                        {isServicesOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            transition={{ duration: 0.2 }}
+                            onMouseLeave={() => setIsServicesOpen(false)}
+                            className="absolute top-full left-0 mt-2 w-96 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 p-6 z-50"
+                          >
+                            <div className="grid grid-cols-2 gap-2">
+                              {services.map((service) => (
+                                <Link
+                                  key={service}
+                                  href="/services"
+                                  onClick={() => setIsServicesOpen(false)}
+                                  className="text-sm text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 py-2 px-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200"
+                                >
+                                  {service}
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  )
+                }
+
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`${
+                      item.isButton
+                        ? 'medical-button px-6 py-3'
+                        : item.active
+                        ? 'text-primary-600 dark:text-primary-400 font-semibold'
+                        : 'text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium'
+                    } transition-colors duration-200`}
+                  >
+                    {item.name}
+                  </Link>
+                )
+              })}
             </nav>
 
             {/* Desktop Actions */}
@@ -151,24 +221,66 @@ export function Header() {
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="lg:hidden border-t border-slate-200 dark:border-slate-700 py-4 space-y-4"
+                className="lg:hidden border-t border-slate-200 dark:border-slate-700 py-4 space-y-2"
               >
-                {menuItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`block ${
-                      item.isButton
-                        ? 'medical-button text-center py-3 mx-4'
-                        : item.active
-                        ? 'text-primary-600 dark:text-primary-400 font-semibold px-4 py-2'
-                        : 'text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg mx-4'
-                    } transition-colors duration-200`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                {menuItems.map((item) => {
+                  if (item.hasDropdown) {
+                    return (
+                      <div key={item.name} className="space-y-2">
+                        <button
+                          onClick={() => setIsServicesOpen(!isServicesOpen)}
+                          className="flex items-center justify-between w-full text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg mx-4 transition-colors duration-200"
+                        >
+                          <span>{item.name}</span>
+                          <HiOutlineChevronDown className={`w-4 h-4 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} />
+                        </button>
+
+                        <AnimatePresence>
+                          {isServicesOpen && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="bg-slate-50 dark:bg-slate-800 rounded-lg mx-4 p-4 space-y-1"
+                            >
+                              {services.map((service) => (
+                                <Link
+                                  key={service}
+                                  href="/services"
+                                  onClick={() => {
+                                    setIsServicesOpen(false)
+                                    setIsMenuOpen(false)
+                                  }}
+                                  className="block text-sm text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 py-2 px-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-colors duration-200"
+                                >
+                                  {service}
+                                </Link>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    )
+                  }
+
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`block ${
+                        item.isButton
+                          ? 'medical-button text-center py-3 mx-4'
+                          : item.active
+                          ? 'text-primary-600 dark:text-primary-400 font-semibold px-4 py-2'
+                          : 'text-slate-700 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium px-4 py-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg mx-4'
+                      } transition-colors duration-200`}
+                    >
+                      {item.name}
+                    </Link>
+                  )
+                })}
               </motion.div>
             )}
           </AnimatePresence>
