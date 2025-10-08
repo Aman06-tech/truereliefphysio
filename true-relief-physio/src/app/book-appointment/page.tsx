@@ -1,5 +1,5 @@
 import Header from "@/components/header";
-import BookingForm from "@/components/booking-form";
+import BookingFormSecure from "@/components/booking-form-secure";
 import Link from "next/link";
 import { Phone, Mail, MapPin } from "lucide-react";
 
@@ -21,7 +21,7 @@ export default function BookAppointmentPage() {
       </div>
 
       {/* Booking Form */}
-      <BookingForm />
+      <BookingFormSecure />
 
       {/* Additional Information */}
       <div className="bg-gray-50 dark:bg-gray-800 py-16">
